@@ -14,11 +14,12 @@ A scalable and maintainable Laravel 12 project for managing Admin and Client use
 
 ---
 
-## ⚙️ Installation Steps
+## Installation Steps
 
 1. **Clone the repository**
 
-   git clone https://github.com/your-repo/client-management.git
+   git clone git@github.com:ZhineSmathew/client-port-project.git
+
    cd client-management
    
 2, **Environment setup**
