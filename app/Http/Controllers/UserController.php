@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeleteUserEvent;
+use App\Events\SendNotifiyToUsers;
 use App\Models\User;
 use App\UserTypeEnum;
 use Illuminate\Http\Request;
@@ -41,7 +43,9 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+
+        event(new SendNotifiyToUsers($user));
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -86,7 +90,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        $user = User::find($id);
+
         User::destroy($id);
+
+        event(new DeleteUserEvent($user));
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
